@@ -16,6 +16,10 @@
   .button {
     @apply hover:bg-indigo-700 hover:cursor-pointer transition-ease rounded-lg bg-indigo-600 shadow-indigo-400 shadow-md text-white disabled:bg-gray-400 disabled:shadow-sm disabled:cursor-not-allowed;
   }
+
+  .button-outline {
+    @apply hover:bg-gray-500/30 hover:cursor-pointer text-gray-600 border border-gray-600 transition-ease rounded-lg shadow-indigo-300 shadow-md disabled:bg-gray-400 disabled:shadow-sm disabled:cursor-not-allowed;
+  }
 }
 
 html {

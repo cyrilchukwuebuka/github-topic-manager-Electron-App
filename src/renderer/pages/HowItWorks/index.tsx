@@ -1,66 +1,48 @@
-import {
-  Box,
-  Flex,
-  Text,
-  useColorModeValue,
-  useMediaQuery,
-} from "@chakra-ui/react";
-import React, { FC, useMemo } from "react";
+import { useColorModeValue } from '@chakra-ui/react';
+import { FC, useMemo } from 'react';
+import { useMediaQuery } from 'usehooks-ts';
 
 const HowItWorks: FC<{}> = () => {
-  const [isLargerThan653] = useMediaQuery("(min-width: 653px)");
+  const isLargerThan653 = useMediaQuery('(min-width: 653px)');
   const bgColor = useColorModeValue(
-    "themeLight.textColor",
-    "themeDark.textColor"
+    'themeLight.textColor',
+    'themeDark.textColor'
   );
 
   const Data = useMemo(
     () => [
-      "To be able to make use of this application, you first need to log in with a github account credentials",
+      'To be able to make use of this application, you first need to log in with a github account credentials',
       "Having successfully logged into the user's github account, the application lists all existing github repositories it has access to",
-      "The user can then proceed to select the number of repositories to add/remove specific topic(s)",
+      'The user can then proceed to select the number of repositories to add/remove specific topic(s)',
       'When done with the selection, click on the "Add Topic" button to pop up a Modal',
-      "Type in the topic(s), comma seperated",
+      'Type in the topic(s), comma seperated',
       'Click on the "Add" button to add those topic(s) to the repo(s) selected',
-      "Same process applies when removing topic(s) from repo(s)",
-      "Having successfully made change(s) to repo(s) topic, user can proceed to check out each repo for change(s) made to it",
+      'Same process applies when removing topic(s) from repo(s)',
+      'Having successfully made change(s) to repo(s) topic, user can proceed to check out each repo for change(s) made to it',
       'Note that it may take a while for the changes to reflect on this application, so the user can click on the "Repo Github Page" button made available to be directed to the specific repository page on github',
-      "Same process followed above also applies while trying to add/remove topic(s) from a repo while in the repository detail page, the changes only effect the specific repository",
-      "When done with the process, the user can choose to log out of the application or remain logged in for future use cases",
+      'Same process followed above also applies while trying to add/remove topic(s) from a repo while in the repository detail page, the changes only effect the specific repository',
+      'When done with the process, the user can choose to log out of the application or remain logged in for future use cases',
     ],
     []
   );
 
   return (
-    <Flex
-      direction={isLargerThan653 ? "row" : "column"}
-      maxW="container.xl"
-      w="100%"
-      h="calc(100vh - 80px)"
-      padding={5}
+    <div
+      className={`h-[calc(100vh-80px)] flex ${
+        isLargerThan653 ? 'flex-row' : 'flex-col w-full'
+      } items-center p-5`}
     >
-      <Flex
-        w={isLargerThan653 ? "50%" : "100%"}
-        h={isLargerThan653 ? "100%" : "50%"}
-        direction="column"
-        align="center"
+      <section
+        className={`${
+          isLargerThan653 ? 'w-[50%] h-full' : 'w-full h-[50%]'
+        } flex flex-col items-center`}
       >
-        <Text
-          mb="5%"
-          textDecoration="underline"
-          fontSize={{ base: "18px", md: "26px", lg: "38px" }}
-          textAlign="center"
-          fontWeight="600"
-        >
+        <p className="mb-[5%] underline text-lg md:text-xl font-bold text-center">
           About
-        </Text>
-        <Text
+        </p>
+        <p
           id="about-message"
-          mb="5%"
-          maxW="90%"
-          fontStyle="italic"
-          fontSize={{ base: "12px", md: "16px", lg: "20px" }}
-          textAlign="justify"
+          className="mb-[5%] max-w-[90%] italic text-sm md:text-lg text-justify"
         >
           This Application streamlines the process of adding or removal of
           Topics by developers and github users to one or more github
@@ -70,75 +52,35 @@ const HowItWorks: FC<{}> = () => {
           main page of a repository. Clicking on a topic name refers you to see
           related topics and a list of other repositories classified with that
           topic.
-        </Text>
-      </Flex>
-      <Flex
-        px="1%"
-        w={isLargerThan653 ? "50%" : "100%"}
-        h={isLargerThan653 ? "100%" : "50%"}
-        direction="column"
+        </p>
+      </section>
+      <section
+        className={`p-[1%] ${
+          isLargerThan653 ? 'w-[50%] h-full' : 'w-full h-[50%]'
+        } flex flex-col`}
       >
-        <Text
-          h="7%"
-          mb="5%"
-          textDecoration="underline"
-          fontSize={{ base: "18px", md: "23px", lg: "28px" }}
-          textAlign="center"
-          fontWeight="600"
-        >
+        <p className="mb-5 underline text-lg md:text-xl text-center font-bold">
           How It Works
-        </Text>
-        <Flex
-          mt={isLargerThan653 ? "" : "2.5%"}
-          h={isLargerThan653 ? "fit-content" : "200px"}
-          direction="column"
-          align="center"
-          overflowY="scroll"
-          scrollBehavior="smooth"
-          sx={{
-            "&::-webkit-scrollbar": {
-              width: "5px",
-              borderRadius: "5px",
-              backgroundColor: `rgba(0, 0, 0, 0.05)`,
-            },
-            "&::-webkit-scrollbar-thumb": {
-              borderRadius: "5px",
-              backgroundColor: `rgba(0, 0, 0, 0.05)`,
-            },
-          }}
+        </p>
+        <span
+          className={`${
+            isLargerThan653 ? 'h-fit' : 'h-52 mt-2.5 w-full'
+          } flex flex-col items-center scroll-smooth overflow-y-auto generic-scrollbar`}
         >
           {Data.map((value, i) => (
-            <Flex
+            <div
               key={i}
-              w="100%"
-              mb="10px"
-              px="5%"
-              py={3}
-              align="center"
-              justify="flex-start"
+              className="w-full h-fit px-[5%] py-3 flex items-center justify-start"
             >
-              <Flex w="5%">
-                <Box
-                  h={{ base: "4px", md: "6px", lg: "8px" }}
-                  w={{ base: "4px", md: "6px", lg: "8px" }}
-                  bgColor={bgColor}
-                  borderRadius="50%"
-                ></Box>
-              </Flex>
-              <Flex w="95%">
-                <Text
-                  textAlign="justify"
-                  fontStyle="italic"
-                  fontSize={{ base: "12px", md: "18px", lg: "16px" }}
-                >
-                  {value}
-                </Text>
-              </Flex>
-            </Flex>
+              <span className="w-1 md:w-2 h-1 md:h-2 bg-black rounded-full mr-2"></span>
+              <p className="text-justify italic w-[95%] text-sm md:text-lg">
+                {value}
+              </p>
+            </div>
           ))}
-        </Flex>
-      </Flex>
-    </Flex>
+        </span>
+      </section>
+    </div>
   );
 };
 

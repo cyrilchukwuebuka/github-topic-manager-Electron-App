@@ -12,6 +12,7 @@ import user_avatar from '../../assets/avatar.png';
 import './App.css';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import HowItWorks from './pages/HowItWorks';
 
 export const Flag = flag;
 export const Topic_svg = topic_svg;
@@ -32,9 +33,9 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
+                <Route path="how-it-works" element={<HowItWorks />} />
                 {/* 
                 <Route path="repo/:repoID" element={<RepoDetail />} />
-                <Route path="how-it-works" element={<HowItWorks />} />
                 <Route path="*" element={<PageNotFound />} /> */}
               </Route>
             </Routes>

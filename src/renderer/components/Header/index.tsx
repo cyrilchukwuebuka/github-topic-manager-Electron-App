@@ -61,14 +61,14 @@ const Header: FC<{}> = () => {
           {isLargerThan770 && (
             <Link
               to="/how-it-works"
-              className="focus:outline-none hover:scale-105 font-medium text-base transition-ease"
+              className="focus:outline-none hover:scale-105 font-medium text-sm md:text-base transition-ease"
             >
               How It Works
             </Link>
           )}
           {isLargerThan400 && (
             <button
-              className="font-medium transition-ease hover:scale-105 hover:cursor-pointer"
+              className="font-medium text-sm md:text-base transition-ease hover:scale-105 hover:cursor-pointer"
               // onClick={
               //   accessToken
               //     ? () => firebaseSignOut(dispatch)
@@ -85,10 +85,15 @@ const Header: FC<{}> = () => {
           {isLargerThan500 && (
             <BiGitBranch
               onClick={() => ''}
-              className="focus:outline-none w-5 h-5 hover:scale-105 transition-ease"
+              className="focus:outline-none w-4 md:w-5 h-4 md:h-5 text-indigo-500 hover:scale-105 transition-ease"
             />
           )}
-          <Icon
+
+          <BiMoon
+            onClick={() => ''}
+            className="focus:outline-none w-4 md:w-5 h-4 md:h-5 text-indigo-500 hover:scale-105 transition-ease"
+          />
+          {/* <Icon
             as={icon}
             onClick={toggleColorMode}
             mx={1}
@@ -96,16 +101,16 @@ const Header: FC<{}> = () => {
             h={{ base: '18px', md: '20px', lg: '22px' }}
             color={iconColor}
             _hover={{ transform: 'scale(1.15)', cursor: 'pointer' }}
-          />
+          /> */}
 
-          <span className="w-6 h-6 border rounded-full overflow-hidden border-gray-300">
+          <span className="w-6 h-6 border rounded-full overflow-hidden border-gray-500">
             <img src={avatar ? `${avatar}` : `${User_avatar}`} alt="" />
           </span>
         </aside>
 
         <VscThreeBars
           onClick={() => setToggle(!toggle)}
-          className="ml-10 w-5 h-5 transition-ease hover:scale-105 hover:cursor-pointer"
+          className="ml-5 md:ml-10 w-5 h-5 transition-ease hover:scale-105 hover:cursor-pointer"
         />
 
         <DrawerCompenent
