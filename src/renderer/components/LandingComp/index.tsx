@@ -1,15 +1,6 @@
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Image,
-  Link,
-  Text,
-} from '@chakra-ui/react';
 import { FC } from 'react';
 import Tilt from 'react-parallax-tilt';
-import { Link as ReactLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Topic_svg } from 'renderer/App';
 // import { useAppDispatch } from "src/globalState/stateHooks";
 // import { firebaseSignInWithPopup } from '../../services/firebaseApp';
@@ -18,102 +9,44 @@ const LandingComp: FC<{}> = () => {
   // const dispatch = useAppDispatch();
 
   return (
-    <Container
-      maxW="container.xl"
-      w="100%"
-      h="calc(100vh - 80px)"
-      padding="10px"
-    >
-      <Flex
-        wrap="wrap"
-        h="100%"
-        py="8%"
-        mt="2%"
-        align="center"
-        justify="center"
-        borderRight="1px"
-        borderTop="1px"
-        borderColor="gray.200"
-        boxShadow="base"
-        overflowY="scroll"
-        sx={{
-          '&::-webkit-scrollbar': {
-            width: '1px',
-            borderRadius: '8px',
-            backgroundColor: `rgba(0, 0, 0, 0.05)`,
-          },
-          '&::-webkit-scrollbar-thumb': {
-            borderRadius: '8px',
-            backgroundColor: `rgba(0, 0, 0, 0.05)`,
-          },
-        }}
-      >
+    <div className="w-full h-[calc(100vh-90px)] md:h-[calc(100vh-90px)] lg:h-[calc(100vh-85px)] px-2.5">
+      <div className="flex flex-wrap md:space-x-4 h-full py-6 md:py-3 items-center justify-center border-r border-t shadow-sm overflow-y-auto hidden-scrollbar">
         <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5}>
-          <Box
-            p={8}
-            marginRight={5}
-            h={{ base: '150px', md: '250px', lg: '350px' }}
-            w={{ base: '150px', md: '250px', lg: '350px' }}
-            borderLeft="1px"
-            borderBottom="1px"
-            borderColor="gray.200"
-            boxShadow="base"
-          >
-            <Image src={Topic_svg} alt="Topic" />
-          </Box>
+          <img
+            src={Topic_svg}
+            alt="Topic"
+            className="w-96 h-96 pt-10 border-l border-b shadow-sm"
+          />
         </Tilt>
 
-        <Flex align="center" justify="center" direction="column" p={4}>
-          <Flex p={10} wrap="wrap" align="center" justify="center">
-            <Text
-              textAlign="center"
-              fontStyle="italic"
-              fontSize={{ base: '14px', md: '16px', lg: '18px' }}
-            >
+        <section className='items-center justify-center flex flex-col p-6 md:p-4'>
+          <span className="flex flex-col md:flex-row items-center justify-center">
+            <p className="text-center italic">
               Another Great Day To Create Splendid Topics...
-            </Text>
-            <Text
-              textAlign="center"
-              fontSize={{ base: '14px', md: '16px', lg: '18px' }}
-            >
+            </p>
+            <p className="text-center">
               Why not hop in let's get it started...😊
-            </Text>
-          </Flex>
-          <Text
-            fontSize={{ base: '14px', md: '16px', lg: '18px' }}
-            textAlign="center"
-          >
+            </p>
+          </span>
+          <p className="text-center">
             Click on{' '}
             <Link
-              as={ReactLink}
               to="/how-it-works"
-              _hover={{ color: 'brand.300', textDecoration: 'none' }}
-              _focus={{ outline: 'none' }}
-              fontStyle="italic"
-              fontSize={{ base: '16px', md: '18px', lg: '20px' }}
-              fontWeight="500"
+              className="hover:cursor-pointer hover:text-indigo-600 hover:font-semibold focus:outline-none italic font-semibold"
             >
               How It Works
             </Link>{' '}
             for additional information
-          </Text>
-          <Button
-            h={{ base: '36px', md: '40px', lg: '40px' }}
-            w={{ base: '76px', md: '80px', lg: '80px' }}
-            _hover={{ bg: 'brand.300' }}
-            _active={{ transform: 'scale(1.05)' }}
-            _focus={{ outline: 'none' }}
-            m={5}
-            textTransform="uppercase"
-            bgColor="brand.500"
-            color="white"
+          </p>
+          <button
+          className='button after: active:scale-105 focus:outline-none m-5 uppercase px-6 py-2'
             // onClick={() => firebaseSignInWithPopup(dispatch)}
           >
-            <Text fontSize="14px">Login</Text>
-          </Button>
-        </Flex>
-      </Flex>
-    </Container>
+            Login
+          </button>
+        </section>
+      </div>
+    </div>
   );
 };
 

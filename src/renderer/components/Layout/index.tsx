@@ -8,7 +8,7 @@ const Layout: FC<{}> = () => {
       <div className='h-screen bg-slate-100 overflow-hidden'>
         <Header />
         <main className='app__container'>
-          {/* <Outlet /> */}
+          <Outlet />
         </main>
         <Footer />
       </div>
