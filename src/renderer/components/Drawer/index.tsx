@@ -40,26 +40,22 @@ const DrawerCompenent: FC<DrawerCompenentProps> = ({
     () => [
       {
         href: 'https://github.com/cyrilchukwuebuka',
-        iconAs: VscGithub,
-        bg: bgGithub,
+        iconAs: <VscGithub className="w-4 h-4 text-black" />,
       },
       {
         href: 'https://www.instagram.com/chuk_cy/?hl=en',
-        iconAs: FaInstagram,
-        bg: bgInstagram,
+        iconAs: <FaInstagram className="w-4 h-4 text-red-500" />,
       },
       {
         href: 'https://twitter.com/hooolycode',
-        iconAs: BsTwitter,
-        bg: bgTwitter,
+        iconAs: <BsTwitter className="w-4 h-4 text-blue-500" />,
       },
       {
         href: 'https://linkedin.com/in/chukwuebuka-cyril-muofunanya',
-        iconAs: BsLinkedin,
-        bg: bgLinkedIn,
+        iconAs: <BsLinkedin className="w-4 h-4 text-blue-600" />,
       },
     ],
-    [bgGithub, bgInstagram, bgLinkedIn, bgTwitter]
+    []
   );
 
   useEffect(() => {
@@ -150,7 +146,6 @@ const DrawerCompenent: FC<DrawerCompenentProps> = ({
                 <DrawerFooterLink
                   href={data.href}
                   iconAs={data.iconAs}
-                  bg={data.bg}
                 />
               ))}
             </div>

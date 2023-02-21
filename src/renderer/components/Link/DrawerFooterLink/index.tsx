@@ -1,23 +1,18 @@
-import { Box, Icon, Link } from '@chakra-ui/react';
-import React, { FC } from 'react';
-import { IconType } from 'react-icons';
+import { FC, ReactNode } from 'react';
 
 interface IDrawerFooterLink {
   href: string;
-  iconAs: IconType;
-  bg: string;
+  iconAs: ReactNode;
 }
 
-const DrawerFooterLink: FC<IDrawerFooterLink> = ({ href, iconAs, bg }) => {
+const DrawerFooterLink: FC<IDrawerFooterLink> = ({ href, iconAs }) => {
   return (
-    <Box
-      paddingRight="10px"
-      _hover={{ transform: 'scale(1.05)', cursor: 'pointer' }}
-    >
-      <Link href={href} isExternal _focus={{ outline: 'none' }}>
-        <Icon as={iconAs} color={bg} />
-      </Link>
-    </Box>
+    <section className="pr-2.5 hover:scale-105 hover:cursor-pointer focus:outline-none">
+      {/* use ipc message to make shell open in a browser */}
+      {iconAs}
+      {/* <Link href={href} isExternal _focus={{ outline: 'none' }}>
+      </Link> */}
+    </section>
   );
 };
 

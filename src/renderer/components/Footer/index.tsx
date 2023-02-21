@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text, useColorModeValue } from '@chakra-ui/react';
+import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { FC, useMemo } from 'react';
 import { BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { FaInstagram } from 'react-icons/fa';
@@ -8,77 +8,46 @@ import FooterLink from '../Link/FooterLink';
 
 const Footer: FC<{}> = () => {
   const bgColor = useColorModeValue('themeLight.bg', 'themeDark.bgBody');
-  const bgInstagram = useColorModeValue('red', 'white');
-  const bgGithub = useColorModeValue('black', 'white');
-  const bgLinkedIn = useColorModeValue('#0077b5', 'white');
-  const bgTwitter = useColorModeValue('#1DA1F2', 'white');
 
   const FooterLinkData = useMemo(
     () => [
       {
         href: 'https://github.com/cyrilchukwuebuka',
-        iconAs: VscGithub,
-        bg: bgGithub,
+        iconAs: <VscGithub className="w-4 h-4 text-black" />,
       },
       {
         href: 'https://www.instagram.com/chuk_cy/?hl=en',
-        iconAs: FaInstagram,
-        bg: bgInstagram,
+        iconAs: <FaInstagram className="w-4 h-4 text-red-500" />,
       },
       {
         href: 'https://twitter.com/hooolycode',
-        iconAs: BsTwitter,
-        bg: bgTwitter,
+        iconAs: <BsTwitter className="w-4 h-4 text-blue-500" />,
       },
       {
         href: 'https://linkedin.com/in/chukwuebuka-cyril-muofunanya',
-        iconAs: BsLinkedin,
-        bg: bgLinkedIn,
+        iconAs: <BsLinkedin className="w-4 h-4 text-blue-600" />,
       },
     ],
-    [bgGithub, bgInstagram, bgLinkedIn, bgTwitter]
+    []
   );
 
   return (
-    <Flex
-      px="4px"
-      py="6px"
-      h="30px"
-      w="full"
-      bg={bgColor}
-      borderTop="1px"
-      borderColor="gray.200"
-      boxShadow="sm"
-      align="center"
-      justify="space-between"
-    >
-      <Flex paddingLeft="10px" align="center" justify="center">
-        <Flex align="center" justify="center">
-          <Text
-            textAlign="center"
-            paddingRight="10px"
-            fontSize={{ base: '10px', md: '12px', lg: '14px' }}
-          >
-            © 2022
-          </Text>
-          <Box
-            w={{ base: '10px', md: '13px', lg: '14px' }}
-            h={{ base: '10px', md: '13px', lg: '14px' }}
-            marginRight="10px"
-          >
-            <Image w="12" h="14" src={Flag} />
-          </Box>
-        </Flex>
-        <Text fontSize={{ base: '10px', md: '12px', lg: '14px' }}>
-          Chukwuebuka Cyril Muofunanya
-        </Text>
-      </Flex>
-      <Flex align="center" justify="center" paddingRight="10px">
+    <div className="flex px-1 py-1.5 h-7 w-full items-center justify-between border-t shadow-sm">
+      <section className="flex space-x-2 pl-2.5 items-center justify-center">
+        <span className="flex items-center justify-center">
+          <p className="flex items-center pr-2.5">© 2022</p>
+          <p className="w-4 h-4">
+            <img src={Flag} alt="flag" className="h-full w-full" />
+          </p>
+        </span>
+        <p>Chukwuebuka Cyril Muofunanya</p>
+      </section>
+      <section className="flex space-x-2 items-center justify-center pr-2.5">
         {FooterLinkData.map((data) => (
-          <FooterLink href={data.href} iconAs={data.iconAs} bg={data.bg} />
+          <FooterLink href={data.href} iconAs={data.iconAs} />
         ))}
-      </Flex>
-    </Flex>
+      </section>
+    </div>
   );
 };
 
