@@ -1,27 +1,11 @@
 import {
-  Box,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  Flex,
-  HStack,
-  Icon,
-  Image,
-  LinkBox,
-  LinkOverlay,
-  Text,
-  useColorModeValue,
-  VStack,
+  useColorModeValue
 } from '@chakra-ui/react';
 import { FC, useEffect, useMemo } from 'react';
 import { BsLinkedin, BsTwitter } from 'react-icons/bs';
 import { FaInstagram } from 'react-icons/fa';
-import { VscGithub } from 'react-icons/vsc';
 import { GrFormClose } from 'react-icons/gr';
+import { VscGithub } from 'react-icons/vsc';
 import Tilt from 'react-parallax-tilt';
 import { Link } from 'react-router-dom';
 // import { useAppDispatch } from "src/globalState/stateHooks";
@@ -29,6 +13,8 @@ import { Link } from 'react-router-dom';
 //   firebaseSignInWithPopup,
 //   firebaseSignOut
 // } from "../../services/firebaseApp";
+import { Flag } from 'renderer/App';
+import { useAppDispatch } from 'renderer/globalState/stateHooks';
 import DrawerFooterLink from '../Link/DrawerFooterLink';
 
 type DrawerCompenentProps = {
@@ -42,7 +28,7 @@ const DrawerCompenent: FC<DrawerCompenentProps> = ({
   onClose,
   accessToken,
 }) => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const bgColor = useColorModeValue('themeLight.bg', 'themeDark.bgBody');
   const logoColor = useColorModeValue('themeLight.logo', 'themeDark.logo');
   const bgInstagram = useColorModeValue('red', 'white');
@@ -91,10 +77,13 @@ const DrawerCompenent: FC<DrawerCompenentProps> = ({
     <div
       className={`z-10 ${
         isOpen ? 'flex' : 'flex translate-x-full'
-      } pt-12 md:pt-0 justify-end overflow-y-hidden fixed top-0 bottom-0 left-0 right-0 bg-black/50 transition-ease h-screen`}
+      } justify-end overflow-y-hidden fixed top-0 bottom-0 left-0 right-0 bg-black/50 transition-ease h-screen`}
     >
-      <section className="fixed top-0 bottom-0 left-0 right-0"></section>
-      <section className="relative w-full p-5 md:p-10 sm:w-[60%] md:w-[40%] lg:w-[30%] bg-slate-100 h-full place-self-end">
+      <section
+        onClick={() => onClose(false)}
+        className="fixed top-0 bottom-0 left-0 right-0"
+      ></section>
+      <section className="relative w-full p-5 md:p-10 sm:w-[50%] md:w-[40%] lg:w-[30%] bg-slate-100 h-screen place-self-end">
         <div
           onClick={() => onClose(false)}
           className="hover:cursor-pointer hover:bg-slate-200 transition-ease absolute top-5 right-7 z-10 w-8 h-8 rounded border flex items-center justify-center"
@@ -102,7 +91,7 @@ const DrawerCompenent: FC<DrawerCompenentProps> = ({
           <GrFormClose className="w-6 h-6" />
         </div>
 
-        <section className="flex items-center">
+        <section className="flex items-center h-[10vh]">
           <Link to="/" className="focus:outline-none">
             <div className="flex items-center space-x-2">
               <Tilt tiltMaxAngleX={20} tiltMaxAngleY={20}>
@@ -115,116 +104,60 @@ const DrawerCompenent: FC<DrawerCompenentProps> = ({
             </div>
           </Link>
         </section>
+
+        <section className="flex flex-col space-y-2 h-[65vh] pt-5">
+          <Link
+            to="/how-it-works"
+            className="hover:cursor-pointer hover:scale-105 transition-ease focus:outline-none font-medium w-fit"
+          >
+            How It Works
+          </Link>
+          <button
+            className="hover:cursor-pointer hover:scale-105 transition-ease focus:outline-none font-medium w-fit"
+            // onClick={
+            //   accessToken
+            //     ? () => firebaseSignOut(dispatch)
+            //     : () => firebaseSignInWithPopup(dispatch)
+            // }
+          >
+            {accessToken ? 'Log out' : 'Login'}
+          </button>
+
+          {/* sends ipc message to use shell tp open link on browser 
+          "https://github.com/cyrilchukwuebuka/github-topic-manager"*/}
+          <button className="hover:cursor-pointer hover:scale-105 transition-ease focus:outline-none font-medium w-fit">
+            <Link
+              className="hover:cursor-pointer font-medium"
+              to="https://github.com/cyrilchukwuebuka/github-topic-manager"
+              // use ipc to make shell open the link on a browser
+            >
+              Fork Repo
+            </Link>
+          </button>
+        </section>
+
+        <section className="max-h-[25vh]">
+          <div className="flex flex-col px-1 py-1.5 h-full w-full border-t items-center justify-center">
+            <div className="pl-2.5 flex items-center justify-center">
+              <p className="pr-2.5">© 2022</p>
+              <span className="w-4 h-4 mr-2.5">
+                <img src={Flag} alt="Flag" className="w-full h-full" />
+              </span>
+            </div>
+            <p>Chukwuebuka Cyril Muofunanya</p>
+            <div className="flex items-center justify-center pr-2.5">
+              {FooterLinkData.map((data) => (
+                <DrawerFooterLink
+                  href={data.href}
+                  iconAs={data.iconAs}
+                  bg={data.bg}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
       </section>
     </div>
-    // <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-    //   <DrawerOverlay />
-    //   <DrawerContent backgroundColor={bgColor}>
-    //     <DrawerHeader>
-    //       <Flex w="100%" align="center" justify="space-between">
-    //         <Box alignItems="center">
-    //           <LinkBox>
-    //             <HStack _hover={{ cursor: 'pointer' }}>
-    //               <LinkOverlay
-    //                 as={ReactLink}
-    //                 to="/"
-    //                 _focus={{ outline: 'none' }}
-    //               >
-    //                 <Tilt tiltMaxAngleX={20} tiltMaxAngleY={20}>
-    //                   <Icon as={VscGithub} w={35} h={35} color={logoColor} />
-    //                 </Tilt>
-    //               </LinkOverlay>
-    //               <VStack>
-    //                 <Text fontWeight="bold" lineHeight="10px" color={logoColor}>
-    //                   TOPIC
-    //                 </Text>
-    //                 <Text fontWeight="bold" lineHeight="10px" color={logoColor}>
-    //                   MANAGER
-    //                 </Text>
-    //               </VStack>
-    //             </HStack>
-    //           </LinkBox>
-    //         </Box>
-    //         <Button h={10} w={10} variant="outline" m={3} onClick={onClose}>
-    //           x
-    //         </Button>
-    //       </Flex>
-    //     </DrawerHeader>
-
-    //     <DrawerBody>
-    //       <Box
-    //         mb="10px"
-    //         _hover={{ transform: 'scale(1.02)', cursor: 'pointer' }}
-    //       >
-    //         <Link
-    //           as={ReactLink}
-    //           to="/how-it-works"
-    //           _focus={{ outline: 'none' }}
-    //           _hover={{ textDecoration: 'none' }}
-    //           fontWeight="500"
-    //         >
-    //           How It Works
-    //         </Link>
-    //       </Box>
-    //       <Text
-    //         mb="10px"
-    //         _hover={{ transform: 'scale(1.02)', cursor: 'pointer' }}
-    //         fontWeight="500"
-    //         // onClick={
-    //         //   accessToken
-    //         //     ? () => firebaseSignOut(dispatch)
-    //         //     : () => firebaseSignInWithPopup(dispatch)
-    //         // }
-    //       >
-    //         {accessToken ? 'Log out' : 'Login'}
-    //       </Text>
-    //       <Box
-    //         mb="10px"
-    //         _hover={{ transform: 'scale(1.02)', cursor: 'pointer' }}
-    //       >
-    //         <Link
-    //           href="https://github.com/cyrilchukwuebuka/github-topic-manager"
-    //           _hover={{ cursor: 'pointer' }}
-    //           fontWeight="500"
-    //         >
-    //           Fork Repo
-    //         </Link>
-    //       </Box>
-    //     </DrawerBody>
-
-    //     <DrawerFooter>
-    //       <Flex
-    //         direction="column"
-    //         px="4px"
-    //         py="6px"
-    //         h="100%"
-    //         w="100%"
-    //         bg={bgColor}
-    //         borderTop="1px"
-    //         borderColor="gray.200"
-    //         align="center"
-    //         justify="space-between"
-    //       >
-    //         <Flex paddingLeft="10px" align="center" justify="center">
-    //           <Text paddingRight="10px">© 2022</Text>
-    //           <Box w="15px" h="15px" marginRight="10px">
-    //             <Image w="100%" h="100%" src="/images/flag.png" />
-    //           </Box>
-    //         </Flex>
-    //         <Text>Chukwuebuka Cyril Muofunanya</Text>
-    //         <Flex align="center" justify="center" paddingRight="10px">
-    //           {FooterLinkData.map((data) => (
-    //             <DrawerFooterLink
-    //               href={data.href}
-    //               iconAs={data.iconAs}
-    //               bg={data.bg}
-    //             />
-    //           ))}
-    //         </Flex>
-    //       </Flex>
-    //     </DrawerFooter>
-    //   </DrawerContent>
-    // </Drawer>
   );
 };
 

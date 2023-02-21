@@ -40,8 +40,6 @@ const Header: FC<{}> = () => {
   const avatar = userData?.photoURL;
   const accessToken = userData?.accessToken;
 
-  console.log(toggle)
-
   return (
     <div className="px-5 py-3 shadow flex items-center justify-between">
       <section className="flex items-center">
